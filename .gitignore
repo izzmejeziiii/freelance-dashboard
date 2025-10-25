@@ -34,9 +34,6 @@ yarn-error.log*
 .env*
 .env*.local
 
-# Netlify
-.netlify
-
 # vercel
 .vercel
 
