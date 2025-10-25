@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useResources } from '@/hooks/useDatabase';
+import { Resource } from '@/types/database';
 import ResourceForm from '@/components/Resources/ResourceForm';
 import ResourceCard from '@/components/Resources/ResourceCard';
 import Loading from '@/components/Loading';
@@ -17,7 +18,7 @@ export default function ResourcesPage() {
   const router = useRouter();
   const { data: resources, loading: resourcesLoading, deleteItem } = useResources();
   const [showForm, setShowForm] = useState(false);
-  const [editingResource, setEditingResource] = useState(null);
+  const [editingResource, setEditingResource] = useState<Resource | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,7 +37,7 @@ export default function ResourcesPage() {
     return null;
   }
 
-  const handleEdit = (resource: any) => {
+  const handleEdit = (resource: Resource) => {
     setEditingResource(resource);
     setShowForm(true);
   };
@@ -272,7 +273,7 @@ export default function ResourcesPage() {
       {/* Resource Form Modal */}
       {showForm && (
         <ResourceForm
-          resource={editingResource}
+          resource={editingResource || undefined}
           onClose={handleCloseForm}
         />
       )}

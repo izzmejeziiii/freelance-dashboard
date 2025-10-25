@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useGoals } from '@/hooks/useDatabase';
+import { Goal } from '@/types/database';
 import GoalForm from '@/components/Goals/GoalForm';
 import GoalCard from '@/components/Goals/GoalCard';
 import Loading from '@/components/Loading';
@@ -16,7 +17,7 @@ export default function GoalsPage() {
   const router = useRouter();
   const { data: goals, loading: goalsLoading, deleteItem } = useGoals();
   const [showForm, setShowForm] = useState(false);
-  const [editingGoal, setEditingGoal] = useState(null);
+  const [editingGoal, setEditingGoal] = useState<Goal | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function GoalsPage() {
     return null;
   }
 
-  const handleEdit = (goal: any) => {
+  const handleEdit = (goal: Goal) => {
     setEditingGoal(goal);
     setShowForm(true);
   };
@@ -238,7 +239,7 @@ export default function GoalsPage() {
       {/* Goal Form Modal */}
       {showForm && (
         <GoalForm
-          goal={editingGoal}
+          goal={editingGoal || undefined}
           onClose={handleCloseForm}
         />
       )}

@@ -27,7 +27,11 @@ export default function ProjectForm({ project, onClose }: ProjectFormProps) {
       if (project) {
         await updateItem(project.id, formData);
       } else {
-        await add(formData);
+        await add({
+          ...formData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -82,7 +86,7 @@ export default function ProjectForm({ project, onClose }: ProjectFormProps) {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as 'To Do' | 'In Progress' | 'Done' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="To Do">To Do</option>

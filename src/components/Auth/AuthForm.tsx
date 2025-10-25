@@ -47,10 +47,11 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
       } else {
         await signIn(data.email, data.password);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       // Handle specific Firebase Auth errors
+      const error = err as { code?: string; message?: string };
       if (mode === 'signin') {
-        switch (err.code) {
+        switch (error.code) {
           case 'auth/user-not-found':
             setError('User does not exist');
             break;
@@ -70,11 +71,11 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
             setError('Too many failed attempts. Please try again later');
             break;
           default:
-            setError(err.message || 'An error occurred');
+            setError(error.message || 'An error occurred');
         }
       } else {
         // Handle signup errors
-        switch (err.code) {
+        switch (error.code) {
           case 'auth/email-already-in-use':
             setError('An account with this email already exists');
             break;
@@ -85,7 +86,7 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
             setError('Password is too weak');
             break;
           default:
-            setError(err.message || 'An error occurred');
+            setError(error.message || 'An error occurred');
         }
       }
     } finally {
@@ -99,9 +100,10 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
 
     try {
       await signInWithGoogle();
-    } catch (err: any) {
+    } catch (err: unknown) {
       // Handle specific Google sign-in errors
-      switch (err.code) {
+      const error = err as { code?: string; message?: string };
+      switch (error.code) {
         case 'auth/popup-closed-by-user':
           setError('Sign-in was cancelled');
           break;
@@ -115,7 +117,7 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
           setError('An account already exists with this email using a different sign-in method');
           break;
         default:
-          setError(err.message || 'An error occurred during Google sign-in');
+          setError(error.message || 'An error occurred during Google sign-in');
       }
     } finally {
       setLoading(false);

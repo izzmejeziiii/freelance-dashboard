@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/contexts/ToastContext';
 import { User, Mail, Camera, Save, AlertCircle } from 'lucide-react';
@@ -12,7 +13,7 @@ interface ProfileFormData {
 }
 
 export default function ProfileForm() {
-  const { user, userProfile, updateUserProfile, updateUserEmail, uploadProfilePhoto } = useAuth();
+  const { userProfile, updateUserProfile, updateUserEmail, uploadProfilePhoto } = useAuth();
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -71,7 +72,7 @@ export default function ProfileForm() {
           setSelectedFile(null);
           setPreviewImage(null);
           hasChanges = true;
-        } catch (uploadError) {
+        } catch {
           throw new Error('Failed to upload profile photo. Please try again.');
         }
       }
@@ -90,12 +91,12 @@ export default function ProfileForm() {
           message: 'No changes were made to your profile'
         });
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'An error occurred');
       showToast({
         type: 'error',
         title: 'Update Failed',
-        message: err.message || 'An error occurred while updating your profile'
+        message: (err as Error).message || 'An error occurred while updating your profile'
       });
     } finally {
       clearTimeout(timeoutId);
@@ -170,15 +171,19 @@ export default function ProfileForm() {
           <div className="relative">
             <div className="w-20 h-20 rounded-full bg-stone-200 dark:bg-stone-700 flex items-center justify-center overflow-hidden">
               {previewImage ? (
-                <img
+                <Image
                   src={previewImage}
                   alt="Profile Preview"
+                  width={80}
+                  height={80}
                   className="w-full h-full object-cover"
                 />
               ) : userProfile?.photoURL && userProfile.photoURL !== null ? (
-                <img
+                <Image
                   src={userProfile.photoURL}
                   alt="Profile"
+                  width={80}
+                  height={80}
                   className="w-full h-full object-cover"
                 />
               ) : (

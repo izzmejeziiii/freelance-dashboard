@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useFinances, useClients, useProjects } from '@/hooks/useDatabase';
+import { Finance } from '@/types/database';
 import FinanceForm from '@/components/Finances/FinanceForm';
 import Loading from '@/components/Loading';
 import { Plus, DollarSign, TrendingUp, TrendingDown, Calendar, Filter, Edit, Trash2 } from 'lucide-react';
@@ -18,7 +19,7 @@ export default function FinancesPage() {
   const { data: clients } = useClients();
   const { data: projects } = useProjects();
   const [showForm, setShowForm] = useState(false);
-  const [editingFinance, setEditingFinance] = useState(null);
+  const [editingFinance, setEditingFinance] = useState<Finance | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
 
   const financialStats = useMemo(() => {
@@ -59,7 +60,7 @@ export default function FinancesPage() {
     return null;
   }
 
-  const handleEdit = (finance: any) => {
+  const handleEdit = (finance: Finance) => {
     setEditingFinance(finance);
     setShowForm(true);
   };
@@ -189,7 +190,7 @@ export default function FinancesPage() {
 
       {/* Monthly Breakdown */}
       <div className="bg-white rounded-lg border border-stone-200 p-6">
-        <h3 className="text-lg font-semibold text-stone-900 mb-4">This Month's Breakdown</h3>
+        <h3 className="text-lg font-semibold text-stone-900 mb-4">This Month&apos;s Breakdown</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
             <p className="text-2xl font-bold text-green-600">{formatCurrency(financialStats.monthlyIncome)}</p>
@@ -237,7 +238,7 @@ export default function FinancesPage() {
           <p className="text-stone-600 mb-4">
             {filter === 'all' 
               ? 'Start by adding your first income or expense record'
-              : `No records match the "${filter}" filter`
+              : `No records match the &quot;${filter}&quot; filter`
             }
           </p>
           {filter === 'all' && (
@@ -332,7 +333,7 @@ export default function FinancesPage() {
       {/* Finance Form Modal */}
       {showForm && (
         <FinanceForm
-          finance={editingFinance}
+          finance={editingFinance || undefined}
           onClose={handleCloseForm}
         />
       )}

@@ -160,7 +160,7 @@ export default function Dashboard() {
       <div className="bg-white rounded-lg border border-stone-200 p-6">
         <h3 className="text-lg font-semibold text-stone-900 mb-4 flex items-center">
           <Calendar className="w-5 h-5 mr-2" />
-          Today's Focus
+          Today&apos;s Focus
         </h3>
         {todaysTasks.length > 0 ? (
           <div className="space-y-2">

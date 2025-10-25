@@ -5,6 +5,7 @@ import ProfileForm from '@/components/AccountSettings/ProfileForm';
 import PasswordForm from '@/components/AccountSettings/PasswordForm';
 import ThemeSettings from '@/components/AccountSettings/ThemeSettings';
 import DeleteAccountForm from '@/components/AccountSettings/DeleteAccountForm';
+import Image from 'next/image';
 import { User, Settings, LogOut, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -70,9 +71,11 @@ export default function AccountPage() {
         <div className="flex items-center space-x-4">
           <div className="w-16 h-16 rounded-full bg-stone-200 dark:bg-stone-700 flex items-center justify-center overflow-hidden">
             {userProfile?.photoURL && userProfile.photoURL !== null ? (
-              <img
+              <Image
                 src={userProfile.photoURL}
                 alt="Profile"
+                width={64}
+                height={64}
                 className="w-full h-full object-cover"
               />
             ) : (

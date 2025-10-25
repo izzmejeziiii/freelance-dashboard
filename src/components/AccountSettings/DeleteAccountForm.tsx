@@ -11,7 +11,7 @@ interface DeleteAccountFormData {
 }
 
 export default function DeleteAccountForm() {
-  const { user, deleteUserAccount } = useAuth();
+  const { deleteUserAccount } = useAuth();
   const { showToast } = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,11 +42,11 @@ export default function DeleteAccountForm() {
         title: 'Account Deleted',
         message: 'Your account has been permanently deleted.'
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       showToast({
         type: 'error',
         title: 'Deletion Failed',
-        message: err.message || 'Failed to delete account. Please try again.'
+        message: (err as Error).message || 'Failed to delete account. Please try again.'
       });
     } finally {
       setLoading(false);
@@ -103,7 +103,7 @@ export default function DeleteAccountForm() {
               <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
               <div className="text-sm text-red-800 dark:text-red-200">
                 <p className="font-medium mb-2">Final confirmation required</p>
-                <p>Please confirm your password and type "DELETE" to permanently delete your account.</p>
+                <p>Please confirm your password and type &quot;DELETE&quot; to permanently delete your account.</p>
               </div>
             </div>
           </div>
@@ -142,13 +142,13 @@ export default function DeleteAccountForm() {
           {/* Confirmation Text */}
           <div>
             <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-2">
-              Type "DELETE" to confirm
+              Type &quot;DELETE&quot; to confirm
             </label>
             <input
               type="text"
               {...register('confirmText', {
-                required: 'Please type "DELETE" to confirm',
-                validate: (value) => value === 'DELETE' || 'Please type "DELETE" exactly as shown'
+                required: 'Please type &quot;DELETE&quot; to confirm',
+                validate: (value) => value === 'DELETE' || 'Please type &quot;DELETE&quot; exactly as shown'
               })}
               className="w-full px-4 py-3 border border-stone-300 dark:border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-stone-800 dark:text-white"
               placeholder="Type DELETE"

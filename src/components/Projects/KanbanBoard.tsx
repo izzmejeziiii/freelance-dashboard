@@ -36,7 +36,7 @@ export default function KanbanBoard({ onEdit, onDelete }: KanbanBoardProps) {
     if (!draggedProject) return;
 
     try {
-      await updateItem(draggedProject, { status: newStatus as any });
+      await updateItem(draggedProject, { status: newStatus as 'To Do' | 'In Progress' | 'Done' });
     } catch (error) {
       console.error('Error updating project status:', error);
     }

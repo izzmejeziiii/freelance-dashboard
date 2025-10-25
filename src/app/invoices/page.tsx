@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useInvoices, useClients } from '@/hooks/useDatabase';
+import { Invoice } from '@/types/database';
 import InvoiceForm from '@/components/Invoices/InvoiceForm';
 import InvoicePreview from '@/components/Invoices/InvoicePreview';
 import Loading from '@/components/Loading';
@@ -18,8 +19,8 @@ export default function InvoicesPage() {
   const { data: invoices, loading: invoicesLoading, deleteItem } = useInvoices();
   const { data: clients } = useClients();
   const [showForm, setShowForm] = useState(false);
-  const [editingInvoice, setEditingInvoice] = useState(null);
-  const [previewInvoice, setPreviewInvoice] = useState(null);
+  const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
+  const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
   const [filter, setFilter] = useState<FilterType>('all');
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function InvoicesPage() {
     return null;
   }
 
-  const handleEdit = (invoice: any) => {
+  const handleEdit = (invoice: Invoice) => {
     setEditingInvoice(invoice);
     setShowForm(true);
   };
@@ -294,7 +295,7 @@ export default function InvoicesPage() {
       {/* Invoice Form Modal */}
       {showForm && (
         <InvoiceForm
-          invoice={editingInvoice}
+          invoice={editingInvoice || undefined}
           onClose={handleCloseForm}
         />
       )}

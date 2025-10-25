@@ -50,7 +50,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
     }
   };
 
-  const updateInvoiceItem = (itemId: string, field: keyof InvoiceItem, value: any) => {
+  const updateInvoiceItem = (itemId: string, field: keyof InvoiceItem, value: string | number) => {
     setItems(items.map(item => {
       if (item.id === itemId) {
         const updatedItem = { ...item, [field]: value };
@@ -77,7 +77,11 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
       if (invoice) {
         await updateItem(invoice.id, invoiceData);
       } else {
-        await add(invoiceData);
+        await add({
+          ...invoiceData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -186,7 +190,7 @@ export default function InvoiceForm({ invoice, onClose }: InvoiceFormProps) {
             </div>
             
             <div className="space-y-3">
-              {items.map((item, index) => (
+              {items.map((item) => (
                 <div key={item.id} className="grid grid-cols-12 gap-3 items-end">
                   <div className="col-span-5">
                     <label className="block text-sm font-medium text-stone-700 mb-1">

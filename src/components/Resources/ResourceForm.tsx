@@ -25,7 +25,11 @@ export default function ResourceForm({ resource, onClose }: ResourceFormProps) {
       if (resource) {
         await updateItem(resource.id, formData);
       } else {
-        await add(formData);
+        await add({
+          ...formData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -71,7 +75,7 @@ export default function ResourceForm({ resource, onClose }: ResourceFormProps) {
               </label>
               <select
                 value={formData.type}
-                onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, type: e.target.value as 'Tool' | 'Article' | 'Video' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Tool">🔧 Tool</option>

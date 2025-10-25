@@ -81,7 +81,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
             </tr>
           </thead>
           <tbody>
-            {invoice.items.map((item, index) => (
+            {invoice.items.map((item) => (
               <tr key={item.id} className="border-b border-stone-100">
                 <td className="py-3 px-4 text-stone-900">{item.description || 'Service'}</td>
                 <td className="py-3 px-4 text-right text-stone-900">{item.quantity}</td>

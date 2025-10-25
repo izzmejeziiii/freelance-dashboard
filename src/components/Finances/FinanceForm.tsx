@@ -29,7 +29,11 @@ export default function FinanceForm({ finance, onClose }: FinanceFormProps) {
       if (finance) {
         await updateItem(finance.id, formData);
       } else {
-        await add(formData);
+        await add({
+          ...formData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -70,7 +74,7 @@ export default function FinanceForm({ finance, onClose }: FinanceFormProps) {
               <select
                 required
                 value={formData.type}
-                onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, type: e.target.value as 'Income' | 'Expense' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Income">Income</option>

@@ -26,7 +26,11 @@ export default function TaskForm({ task, onClose }: TaskFormProps) {
       if (task) {
         await updateItem(task.id, formData);
       } else {
-        await add(formData);
+        await add({
+          ...formData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -80,7 +84,7 @@ export default function TaskForm({ task, onClose }: TaskFormProps) {
               </label>
               <select
                 value={formData.priority}
-                onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, priority: e.target.value as 'Low' | 'Medium' | 'High' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Low">Low</option>
@@ -95,7 +99,7 @@ export default function TaskForm({ task, onClose }: TaskFormProps) {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as 'To Do' | 'Doing' | 'Done' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="To Do">To Do</option>

@@ -26,7 +26,11 @@ export default function GoalForm({ goal, onClose }: GoalFormProps) {
       if (goal) {
         await updateItem(goal.id, formData);
       } else {
-        await add(formData);
+        await add({
+          ...formData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -63,7 +67,7 @@ export default function GoalForm({ goal, onClose }: GoalFormProps) {
               </label>
               <select
                 value={formData.category}
-                onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, category: e.target.value as 'Work' | 'Personal' | 'Financial' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Work">Work</option>
@@ -78,7 +82,7 @@ export default function GoalForm({ goal, onClose }: GoalFormProps) {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as 'Active' | 'Completed' | 'Paused' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Active">Active</option>

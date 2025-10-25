@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useTasks } from '@/hooks/useDatabase';
+import { Task } from '@/types/database';
 import TaskForm from '@/components/Tasks/TaskForm';
 import TaskKanban from '@/components/Tasks/TaskKanban';
 import Loading from '@/components/Loading';
@@ -18,7 +19,7 @@ export default function TasksPage() {
   const router = useRouter();
   const { data: tasks, loading: tasksLoading, deleteItem } = useTasks();
   const [showForm, setShowForm] = useState(false);
-  const [editingTask, setEditingTask] = useState(null);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>('kanban');
   const [filter, setFilter] = useState<FilterType>('all');
 
@@ -36,7 +37,7 @@ export default function TasksPage() {
     return null;
   }
 
-  const handleEdit = (task: any) => {
+  const handleEdit = (task: Task) => {
     setEditingTask(task);
     setShowForm(true);
   };
@@ -182,7 +183,7 @@ export default function TasksPage() {
               className="px-3 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500 text-sm"
             >
               <option value="all">All Tasks</option>
-              <option value="today">Today's Tasks</option>
+              <option value="today">Today&apos;s Tasks</option>
               <option value="overdue">Overdue</option>
               <option value="high-priority">High Priority</option>
             </select>
@@ -321,7 +322,7 @@ export default function TasksPage() {
       {/* Task Form Modal */}
       {showForm && (
         <TaskForm
-          task={editingTask}
+          task={editingTask || undefined}
           onClose={handleCloseForm}
         />
       )}

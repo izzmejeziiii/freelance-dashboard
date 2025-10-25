@@ -95,7 +95,7 @@ export function useAuth() {
     
     // Filter out undefined values to prevent Firebase errors
     const cleanUpdates = Object.fromEntries(
-      Object.entries(updates).filter(([_, value]) => value !== undefined)
+      Object.entries(updates).filter(([, value]) => value !== undefined)
     );
     
     const updatedProfile: UserProfile = {
@@ -138,11 +138,11 @@ export function useAuth() {
       console.log('Database profile updated');
       
       return photoURL;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error uploading profile photo:', error);
       console.error('Error details:', {
-        message: error.message,
-        stack: error.stack
+        message: (error as Error).message,
+        stack: (error as Error).stack
       });
       throw error;
     }
@@ -170,15 +170,16 @@ export function useAuth() {
       // Clear local state
       setUser(null);
       setUserProfile(null);
-    } catch (error: any) {
-      if (error.code === 'auth/wrong-password') {
+    } catch (error: unknown) {
+      const firebaseError = error as { code?: string; message?: string };
+      if (firebaseError.code === 'auth/wrong-password') {
         throw new Error('Incorrect password');
-      } else if (error.code === 'auth/too-many-requests') {
+      } else if (firebaseError.code === 'auth/too-many-requests') {
         throw new Error('Too many failed attempts. Please try again later');
-      } else if (error.code === 'auth/requires-recent-login') {
+      } else if (firebaseError.code === 'auth/requires-recent-login') {
         throw new Error('Please sign in again before deleting your account');
       }
-      throw new Error(error.message || 'Failed to delete account');
+      throw new Error(firebaseError.message || 'Failed to delete account');
     }
   };
 

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Client } from '@/types/database';
 import { useClients } from '@/hooks/useDatabase';
-import { formatDate } from '@/lib/utils';
 
 interface ClientFormProps {
   client?: Client;
@@ -29,7 +28,11 @@ export default function ClientForm({ client, onClose }: ClientFormProps) {
       if (client) {
         await updateItem(client.id, formData);
       } else {
-        await add(formData);
+        await add({
+          ...formData,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
       }
       onClose();
     } catch (error) {
@@ -91,7 +94,7 @@ export default function ClientForm({ client, onClose }: ClientFormProps) {
               </label>
               <select
                 value={formData.status}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as 'Lead' | 'Active' | 'Completed' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Lead">Lead</option>
@@ -106,7 +109,7 @@ export default function ClientForm({ client, onClose }: ClientFormProps) {
               </label>
               <select
                 value={formData.paymentStatus}
-                onChange={(e) => setFormData({ ...formData, paymentStatus: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, paymentStatus: e.target.value as 'Pending' | 'Paid' | 'Overdue' })}
                 className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-500"
               >
                 <option value="Pending">Pending</option>

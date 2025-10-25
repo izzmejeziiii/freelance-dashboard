@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useProjects } from '@/hooks/useDatabase';
+import { Project } from '@/types/database';
 import ProjectForm from '@/components/Projects/ProjectForm';
 import KanbanBoard from '@/components/Projects/KanbanBoard';
 import Loading from '@/components/Loading';
@@ -17,7 +18,7 @@ export default function ProjectsPage() {
   const router = useRouter();
   const { data: projects, loading: projectsLoading, deleteItem } = useProjects();
   const [showForm, setShowForm] = useState(false);
-  const [editingProject, setEditingProject] = useState(null);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>('kanban');
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function ProjectsPage() {
     return null;
   }
 
-  const handleEdit = (project: any) => {
+  const handleEdit = (project: Project) => {
     setEditingProject(project);
     setShowForm(true);
   };
@@ -273,7 +274,7 @@ export default function ProjectsPage() {
       {/* Project Form Modal */}
       {showForm && (
         <ProjectForm
-          project={editingProject}
+          project={editingProject || undefined}
           onClose={handleCloseForm}
         />
       )}

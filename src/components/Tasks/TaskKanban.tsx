@@ -37,7 +37,7 @@ export default function TaskKanban({ onEdit, onDelete }: TaskKanbanProps) {
     if (!draggedTask) return;
 
     try {
-      await updateItem(draggedTask, { status: newStatus as any });
+      await updateItem(draggedTask, { status: newStatus as 'To Do' | 'Doing' | 'Done' });
     } catch (error) {
       console.error('Error updating task status:', error);
     }

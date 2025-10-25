@@ -60,12 +60,12 @@ export default function PasswordForm() {
           message: 'No password changes were made'
         });
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'An error occurred');
       showToast({
         type: 'error',
         title: 'Update Failed',
-        message: err.message || 'An error occurred while updating your password'
+        message: (err as Error).message || 'An error occurred while updating your password'
       });
     } finally {
       setLoading(false);

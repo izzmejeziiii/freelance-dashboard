@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@/hooks/useAuth';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
@@ -39,7 +40,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, userProfile, logout } = useAuth();
+  const { userProfile, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   const handleLogout = async () => {
@@ -71,9 +72,11 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-stone-200 dark:bg-stone-700 flex items-center justify-center overflow-hidden">
                 {userProfile?.photoURL && userProfile.photoURL !== null ? (
-                  <img
+                  <Image
                     src={userProfile.photoURL}
                     alt="Profile"
+                    width={40}
+                    height={40}
                     className="w-full h-full object-cover"
                   />
                 ) : (
