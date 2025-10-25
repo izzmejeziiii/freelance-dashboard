@@ -5,103 +5,116 @@ A comprehensive Notion-style dashboard built with Next.js and Firebase that help
 ## 🚀 Features
 
 ### 📊 Home Dashboard
-- Central hub with quick links to all sections
-- Progress bars showing completion rates
-- Today's focus tasks
-- Financial overview with monthly stats
+
+-   Central hub with quick links to all sections
+-   Progress bars showing completion rates
+-   Today's focus tasks
+-   Financial overview with monthly stats
 
 ### 🧾 Client Tracker
-- Complete client database with contact information
-- Status tracking (Lead, Active, Completed)
-- Payment status monitoring
-- Multiple view modes (Grid, List, Board)
+
+-   Complete client database with contact information
+-   Status tracking (Lead, Active, Completed)
+-   Payment status monitoring
+-   Multiple view modes (Grid, List, Board)
 
 ### 📁 Project Manager
-- Kanban board for project status tracking
-- Client-project relationships
-- Budget tracking
-- Due date management
+
+-   Kanban board for project status tracking
+-   Client-project relationships
+-   Budget tracking
+-   Due date management
 
 ### ✅ Task Board
-- Drag-and-drop Kanban interface
-- Priority levels (High, Medium, Low)
-- Deadline tracking with overdue alerts
-- Project-task relationships
+
+-   Drag-and-drop Kanban interface
+-   Priority levels (High, Medium, Low)
+-   Deadline tracking with overdue alerts
+-   Project-task relationships
 
 ### 💰 Finance Tracker
-- Income and expense tracking
-- Monthly financial summaries
-- Payment method categorization
-- Client and project associations
+
+-   Income and expense tracking
+-   Monthly financial summaries
+-   Payment method categorization
+-   Client and project associations
 
 ### 📄 Invoice Generator
-- Professional invoice templates
-- Itemized billing
-- Client and project integration
-- Multiple status tracking (Draft, Sent, Paid, Overdue)
+
+-   Professional invoice templates
+-   Itemized billing
+-   Client and project integration
+-   Multiple status tracking (Draft, Sent, Paid, Overdue)
 
 ### 🎯 Goals Tracker
-- Personal and professional goal setting
-- Progress tracking with visual bars
-- Category organization (Work, Personal, Financial)
-- Target date management
+
+-   Personal and professional goal setting
+-   Progress tracking with visual bars
+-   Category organization (Work, Personal, Financial)
+-   Target date management
 
 ### 📚 Resources Library
-- Tool and link organization
-- Category-based filtering
-- Type classification (Tools, Articles, Videos)
-- Quick access to external resources
+
+-   Tool and link organization
+-   Category-based filtering
+-   Type classification (Tools, Articles, Videos)
+-   Quick access to external resources
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 15, React 18, TypeScript
-- **Styling**: Tailwind CSS with custom beige/gray/black theme
-- **Database**: Firebase Realtime Database
-- **Icons**: Lucide React
-- **State Management**: React hooks with Firebase integration
+-   **Frontend**: Next.js 15, React 18, TypeScript
+-   **Styling**: Tailwind CSS with custom beige/gray/black theme
+-   **Database**: Firebase Realtime Database
+-   **Icons**: Lucide React
+-   **State Management**: React hooks with Firebase integration
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
-- Firebase project
+-   Node.js 18+
+-   npm or yarn
+-   Firebase project
 
 ### Installation
 
 1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd freelance-dashboard
-   ```
+
+    ```bash
+    git clone <repository-url>
+    cd freelance-dashboard
+    ```
 
 2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+
+    ```bash
+    npm install
+    ```
 
 3. **Set up Firebase**
-   - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Enable Realtime Database
-   - Get your Firebase configuration
+
+    - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com/)
+    - Enable Realtime Database
+    - Get your Firebase configuration
 
 4. **Configure environment variables**
    Create a `.env.local` file in the root directory:
-   ```env
-   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-   NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://your_project_id-default-rtdb.firebaseio.com
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-   ```
+
+    ```env
+    NEXT_PUBLIC_FIREBASE_API_KEY=
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+    NEXT_PUBLIC_FIREBASE_DATABASE_URL=
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+    NEXT_PUBLIC_FIREBASE_APP_ID=
+    ```
 
 5. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+
+    ```bash
+    npm run dev
+    ```
 
 6. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
@@ -142,11 +155,11 @@ src/
 
 The application uses a carefully crafted beige/gray/black color palette inspired by Notion:
 
-- **Primary**: Stone-900 (#1c1917) - Deep charcoal for text and primary actions
-- **Background**: Stone-50 (#fefdfb) - Warm off-white background
-- **Muted**: Stone-100 (#f5f5f4) - Light beige for secondary elements
-- **Borders**: Stone-200 (#e7e5e4) - Subtle borders and dividers
-- **Accents**: Various colors for status indicators and categories
+-   **Primary**: Stone-900 (#1c1917) - Deep charcoal for text and primary actions
+-   **Background**: Stone-50 (#fefdfb) - Warm off-white background
+-   **Muted**: Stone-100 (#f5f5f4) - Light beige for secondary elements
+-   **Borders**: Stone-200 (#e7e5e4) - Subtle borders and dividers
+-   **Accents**: Various colors for status indicators and categories
 
 ## 🔧 Customization
 
@@ -169,15 +182,16 @@ The application uses Tailwind CSS with custom CSS variables. To modify the color
 ## 📱 Responsive Design
 
 The dashboard is fully responsive and works seamlessly across:
-- Desktop (1024px+)
-- Tablet (768px - 1023px)
-- Mobile (320px - 767px)
+
+-   Desktop (1024px+)
+-   Tablet (768px - 1023px)
+-   Mobile (320px - 767px)
 
 ## 🔒 Security
 
-- Firebase Realtime Database rules should be configured for production
-- Environment variables are properly secured
-- Client-side validation with server-side verification recommended
+-   Firebase Realtime Database rules should be configured for production
+-   Environment variables are properly secured
+-   Client-side validation with server-side verification recommended
 
 ## 🚀 Deployment
 
@@ -191,10 +205,11 @@ The dashboard is fully responsive and works seamlessly across:
 ### Other Platforms
 
 The application can be deployed to any platform that supports Next.js:
-- Netlify
-- AWS Amplify
-- Railway
-- DigitalOcean App Platform
+
+-   Netlify
+-   AWS Amplify
+-   Railway
+-   DigitalOcean App Platform
 
 ## 🤝 Contributing
 
@@ -210,10 +225,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Inspired by Notion's clean and functional design
-- Built with modern web technologies
-- Icons provided by Lucide React
-- Styling powered by Tailwind CSS
+-   Inspired by Notion's clean and functional design
+-   Built with modern web technologies
+-   Icons provided by Lucide React
+-   Styling powered by Tailwind CSS
 
 ## 📞 Support
 
