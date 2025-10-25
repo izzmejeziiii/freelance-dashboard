@@ -189,6 +189,17 @@ The dashboard is fully responsive and works seamlessly across:
 3. Add environment variables in Vercel dashboard
 4. Deploy automatically
 
+### Netlify
+
+1. Push your code to GitHub
+2. Connect your repository to Netlify
+3. Add environment variables in Netlify dashboard (Site settings > Environment variables)
+4. Set build command: `npm run build`
+5. Set publish directory: `.next`
+6. Deploy automatically
+
+**Note**: The `netlify.toml` file is included to handle Netlify's secret detection for public environment variables.
+
 ### Other Platforms
 
 The application can be deployed to any platform that supports Next.js:

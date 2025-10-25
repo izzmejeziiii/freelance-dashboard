@@ -1,0 +1,16 @@
+# Ignore environment files from Netlify processing
+.env*
+.env*.local
+
+# Ignore development files
+node_modules
+.next
+.git
+.gitignore
+README.md
+*.md
+
+# Ignore test files
+__tests__
+*.test.*
+*.spec.*
